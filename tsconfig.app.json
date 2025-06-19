@@ -1,0 +1,24 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /* 路径配置 */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@electron/*": ["src/electron/*"],
+      "@renderer/*": ["src/renderer/*"],
+      "@shared/*": ["src/shared/*"],
+    },
+
+    /* 代码检查 */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+}
