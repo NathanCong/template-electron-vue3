@@ -2,8 +2,8 @@
 node_modules
 
 # 构建产物
-dist
-build
+.vite
+out
 
 # 日志文件
 logs

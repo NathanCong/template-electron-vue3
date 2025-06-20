@@ -1,3 +1,9 @@
+import type { ForgeConfig } from '@electron-forge/shared-types';
+import { MakerSquirrel } from '@electron-forge/maker-squirrel';
+import { MakerZIP } from '@electron-forge/maker-zip';
+import { MakerDeb } from '@electron-forge/maker-deb';
+import { MakerRpm } from '@electron-forge/maker-rpm';
+import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
@@ -7,54 +13,40 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
  */
 export default {
   packagerConfig: {
-    asar: process.env.NODE_ENV !== 'development',
-    name: 'template-electron-vue3',
-    executableName: 'tev3',
+    asar: true,
+    name: 'tev3',
     icon: 'src/assets/icons/icon',
   },
   makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
+    new MakerSquirrel({}),
+    new MakerZIP({}, ['darwin']),
+    new MakerDeb({}),
+    new MakerRpm({}),
   ],
   plugins: [
+    new VitePlugin({
+      build: [
+        {
+          entry: 'src/electron/main.ts', // 主进程 entry 文件
+          config: 'vite.main.config.ts', // 主进程 Vite 配置
+          target: 'main',
+        },
+        {
+          entry: 'src/electron/preload.ts', // 预加载脚本 entry 文件
+          config: 'vite.preload.config.ts', // 预加载脚本 Vite 配置
+          target: 'preload',
+        },
+      ],
+      renderer: [
+        {
+          name: 'main_window',               // 窗口名称
+          config: 'vite.renderer.config.ts', // 渲染进程 Vite 配置
+        },
+      ],
+    }),
     {
       name: '@electron-forge/plugin-auto-unpack-natives',
       config: {},
-    },
-    {
-      name: '@electron-forge/plugin-vite',
-      config: {
-        build: [
-          {
-            entry: 'src/electron/main.ts',     // 主进程 entry 文件
-            config: 'vite.electron.config.ts', // 主进程 Vite 配置
-          },
-          {
-            entry: 'src/preload/main.ts',     // 预加载脚本 entry 文件
-            config: 'vite.preload.config.ts', // 预加载脚本 Vite 配置
-          },
-        ],
-        renderer: [
-          {
-            name: 'main_window',               // 窗口名称
-            config: 'vite.renderer.config.ts', // 渲染进程 Vite 配置
-          },
-        ],
-      },
     },
     new FusesPlugin({
       version: FuseVersion.V1,
@@ -66,4 +58,4 @@ export default {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,                   // 强制从ASAR文件加载应用
     }),
   ],
-};
+} satisfies ForgeConfig;

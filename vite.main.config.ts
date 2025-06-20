@@ -7,22 +7,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
  */
 export default defineConfig({
   plugins: [
-    tsconfigPaths(), // 支持tsconfig路径别名
+    tsconfigPaths(),
   ],
   resolve: {
     extensions: ['.ts'],
   },
   build: {
-    outDir: 'dist/electron',
-    lib: {
-      entry: 'src/electron/main.ts',
-      fileName: 'main',
-      formats: ['cjs'],
-    },
-    rollupOptions: {
-      external: ['electron', 'path'],
-    },
+    outDir: '.vite/build',
     minify: process.env.NODE_ENV !== 'development',
-    emptyOutDir: true,
+    emptyOutDir: false,
   },
 });

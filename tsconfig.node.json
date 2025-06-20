@@ -23,7 +23,7 @@
   },
   "include": [
     "forge.config.ts",
-    "vite.electron.config.ts",
+    "vite.main.config.ts",
     "vite.preload.config.ts",
     "vite.renderer.config.ts"
   ]

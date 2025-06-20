@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { IpcMessage, IpcReply } from '@/types/preload';
+import type { IpcMessage, IpcReply } from '@/types/electron';
 
 contextBridge.exposeInMainWorld('electronAPI', {
   // 发送消息
