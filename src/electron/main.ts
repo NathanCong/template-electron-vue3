@@ -1,19 +1,18 @@
 import { app, BrowserWindow } from 'electron';
-import { join } from 'path';
-import { IS_DEVELOPMENT, DEV_SERVER_URL, IS_MAC_OS } from '@/shared/constants/env';
+import { PRELOAD_JS_LOAD_PATH, INDEX_HTML_LOAD_PATH } from '@/electron/constants/path';
+import { IS_DEVELOPMENT } from '@/electron/constants/env';
+import { DEV_SERVER_URL } from '@/electron/constants/server';
+import { IS_MAC_OS } from '@/electron/constants/platform';
 
 let mainWindow: BrowserWindow | null;
 
-/**
- * 创建主窗口
- */
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
     fullscreen: false,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: PRELOAD_JS_LOAD_PATH,
       nodeIntegration: false, // 禁用 Node.js 集成
       contextIsolation: true, // 启用上下文隔离
     },
@@ -23,7 +22,7 @@ function createWindow() {
     mainWindow.loadURL(DEV_SERVER_URL);
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
+    mainWindow.loadFile(INDEX_HTML_LOAD_PATH);
   }
 }
 

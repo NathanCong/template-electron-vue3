@@ -3,7 +3,7 @@ node_modules
 
 # 构建产物
 dist
-dist-electron
+build
 
 # 日志文件
 logs
@@ -24,3 +24,4 @@ lerna-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+out/

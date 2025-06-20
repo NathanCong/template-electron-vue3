@@ -7,9 +7,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@electron/*": ["src/electron/*"],
-      "@renderer/*": ["src/renderer/*"],
-      "@shared/*": ["src/shared/*"],
     },
 
     /* 代码检查 */
