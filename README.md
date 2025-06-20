@@ -15,33 +15,6 @@
 
 ```
 template-electron-vue3
-├── public
-├── src
-│   ├── main
-│   ├── preload
-│   ├── renderer
-│   ├── types
-│   ├── utils
-│   ├── views
-│   ├── App.vue
-│   ├── main.ts
-│   ├── preload.ts
-│   ├── router.ts
-│   ├── shims-vue.d.ts
-│   └── vite-env.d.ts
-├── .env
-├── .env.development
-├── .env.production
-├── .eslintrc.cjs
-├── .gitignore
-├── .prettierrc
-├── README.md
-├── index.html
-├── package.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-└── yarn.lock
 ```
 
 ## 项目开发
@@ -49,12 +22,65 @@ template-electron-vue3
 ### 依赖安装
 
 ```bash
-#
-# 设置 Electron 镜像（仅 Linux 系统）
-#
-export ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
-#
-# 安装项目依赖
-#
 yarn install
+```
+
+### 项目清理
+
+```bash
+yarn clean
+```
+
+### 项目启动
+
+```bash
+yarn start
+```
+
+### 项目打包（免安装版本 - 全平台）
+
+```bash
+yarn package
+```
+
+### 项目打包（免安装版本 - Windows平台）
+
+```bash
+yarn package:win32
+```
+
+### 项目打包（免安装版本 - MacOS平台）
+
+```bash
+yarn package:macos
+```
+
+### 项目打包（免安装版本 - Linux平台）
+
+```bash
+yarn package:linux
+```
+
+### 项目打包（安装版本 - 全平台）
+
+```bash
+yarn make
+```
+
+### 项目打包（安装版本 - Windows平台 - EXE）
+
+```bash
+yarn make:win32
+```
+
+### 项目打包（安装版本 - MacOS平台 - DMG）
+
+```bash
+yarn make:macos
+```
+
+### 项目打包（安装版本 - Linux平台 - DEB、RPM）
+
+```bash
+yarn make:linux
 ```

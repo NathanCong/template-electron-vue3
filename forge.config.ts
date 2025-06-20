@@ -8,20 +8,41 @@ import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 /**
+ * 应用程序名称
+ */
+const APPLICATION_NAME = 'tev3';
+
+/**
+ * Win32 Maker 通用配置
+ */
+const win32MakerOptions = { name: APPLICATION_NAME, authors: 'NathanCong' };
+
+/**
+ * MacOS Maker 通用配置（暂时不支持）
+ */
+const macosMakerOptions = {};
+
+/**
+ * Linux Maker 通用配置
+ */
+const linuxMakerOptions = { bin: APPLICATION_NAME };
+
+/**
  * Electron Forge 配置
  * https://www.electronforge.io/configuration
  */
 export default {
   packagerConfig: {
     asar: true,
-    name: 'tev3',
+    name: APPLICATION_NAME,
+    executableName: APPLICATION_NAME,
     icon: 'src/assets/icons/icon',
   },
   makers: [
-    new MakerSquirrel({}),
-    new MakerZIP({}, ['darwin']),
-    new MakerDeb({}),
-    new MakerRpm({}),
+    new MakerSquirrel({ ...win32MakerOptions }),
+    new MakerZIP({ ...macosMakerOptions }, ['darwin']),
+    new MakerDeb({ options: linuxMakerOptions }),
+    new MakerRpm({ options: linuxMakerOptions }),
   ],
   plugins: [
     new VitePlugin({
